@@ -9,7 +9,6 @@ import { WeatherModule } from './weather/weather.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    WeatherModule,
   ],
 })
 export class AppModule {}
