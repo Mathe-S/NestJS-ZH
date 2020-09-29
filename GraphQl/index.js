@@ -32,6 +32,8 @@ const typeDefs = gql`
       street: String!
       city: String!
     ): Person
+
+    editNumber(name: String!, phone: String!): Person
   }
 
   type Address {
@@ -63,6 +65,14 @@ const resolvers = {
       }
       const person = { ...args, id: uuid() };
       persons = persons.concat(person);
+      return person;
+    },
+    editNumber: (root, args) => {
+      const person = persons.find((p) => p.name === args.name);
+      if (!person) {
+        return null;
+      }
+      person.phone = args.phone;
       return person;
     },
   },
