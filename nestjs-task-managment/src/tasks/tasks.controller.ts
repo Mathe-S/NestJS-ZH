@@ -14,7 +14,7 @@ import {
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { TaskStatus } from './task-status.enum';
-import { createTaskDto } from './dto/create-task.dto';
+import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { TaskStatusValidationPipe } from './pipes/task-status-validation';
 import { Task } from './task.entity';
@@ -25,12 +25,12 @@ import { GetUser } from 'src/auth/get-user.decorator';
 @Controller('tasks')
 @UseGuards(AuthGuard())
 export class TasksController {
-  constructor(private tasksService: TasksService) { }
+  constructor(private tasksService: TasksService) {}
 
   @Get()
   getTasks(
     @Query(ValidationPipe) filterDto: GetTasksFilterDto,
-    @GetUser() user: User
+    @GetUser() user: User,
   ) {
     return this.tasksService.getTasks(filterDto, user);
   }
@@ -38,7 +38,7 @@ export class TasksController {
   @Get('/:id')
   getTaskById(
     @Param('id', ParseIntPipe) id: number,
-    @GetUser() user: User
+    @GetUser() user: User,
   ): Promise<Task> {
     return this.tasksService.getTaskById(id, user);
   }
@@ -46,16 +46,17 @@ export class TasksController {
   @Post()
   @UsePipes(ValidationPipe)
   createTask(
-    @Body() createTaskDto: createTaskDto,
-    @GetUser() user: User
+    @Body() createTaskDto: CreateTaskDto,
+    @GetUser() user: User,
   ): Promise<Task> {
     return this.tasksService.createTask(createTaskDto, user);
   }
 
   @Delete('/:id')
-  deleteTask(@Param(
-    'id', ParseIntPipe) id: number,
-    @GetUser() user: User
+  deleteTask(
+    @Param('id', ParseIntPipe)
+    id: number,
+    @GetUser() user: User,
   ): Promise<void> {
     return this.tasksService.deleteTask(id, user);
   }
@@ -64,7 +65,7 @@ export class TasksController {
   updateStatus(
     @Param('id') id: number,
     @Body('status', TaskStatusValidationPipe) status: TaskStatus,
-    @GetUser() user: User
+    @GetUser() user: User,
   ): Promise<Task> {
     return this.tasksService.updateStatus(id, status, user);
   }
