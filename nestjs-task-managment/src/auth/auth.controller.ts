@@ -7,7 +7,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from './auth.entity';
+import { User } from './user.entity';
 import { AuthService } from './auth.service';
 import { AuthCredentials } from './dto/auth-credentials.dto';
 import { GetUser } from './get-user.decorator';
@@ -15,7 +15,7 @@ import { AccessToken } from './jwt-intefaces';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   @Post('/signup')
   signup(
