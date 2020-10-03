@@ -1,22 +1,16 @@
 import { Column, Entity, ObjectIdColumn, PrimaryColumn } from 'typeorm';
 
 @Entity()
-export class Lesson {
+export class StudentEntity {
   @ObjectIdColumn()
-  _id: string;
+  _id: number;
 
   @PrimaryColumn()
   id: string;
 
   @Column()
-  name: string;
+  firstName: string;
 
   @Column()
-  startDate: string;
-
-  @Column()
-  endDate: string;
-
-  @Column()
-  students: string[];
+  lastName: string;
 }
