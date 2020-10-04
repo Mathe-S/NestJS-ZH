@@ -37,7 +37,7 @@ export default class Book {
 
   @ManyToOne(
     () => Author,
-    author => author.bookConnetion,
+    author => author.bookConnection,
     { primary: true },
   )
   @JoinColumn({ name: 'author_id' })

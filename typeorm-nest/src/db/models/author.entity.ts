@@ -22,9 +22,10 @@ export default class Author {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
+  // Associations
   @OneToMany(
     () => Book,
     book => book.authorConnection,
   )
-  bookConnetion: Promise<Book[]>;
+  bookConnection: Promise<Book[]>;
 }
